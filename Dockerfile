@@ -16,6 +16,12 @@ RUN apt-get update \
 # Copia as configurações do projeto
 COPY pyproject.toml uv.lock* ./
 
+# Instala as dependências no ambiente virtual do uv (.venv)
+RUN uv sync --frozen --no-cache
+
+# Adiciona o ambiente virtual do uv ao PATH do sistema
+ENV PATH="/app/.venv/bin:$PATH"
+
 # Instala as dependências do projeto no ambiente do sistema
 RUN uv pip install --system -r pyproject.toml
 

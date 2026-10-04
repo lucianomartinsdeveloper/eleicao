@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-python manage.py migrate --noinput &&
-python manage.py collectstatic --noinput &
+uv run python manage.py migrate --noinput &&
+uv run python manage.py collectstatic --noinput &
 
-python manage.py qcluster &
+uv run python manage.py qcluster &
 
 gunicorn core.wsgi
