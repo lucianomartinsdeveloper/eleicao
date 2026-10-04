@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Bem-vindo à Empresa</h1>
+  {% if user.is_authenticated %}
+    <p>Você entrou como <strong>{{ user.email }}</strong>.</p>
+    <p>
+      Grupos:
+      {% for group in user.groups.all %}
+        <mark>{{ group.name }}</mark>
+      {% empty %}
+        nenhum
+      {% endfor %}
+    </p>
+  {% else %}
+    <p>Entre com o seu e-mail para ver os funcionários.</p>
+  {% endif %}
+{% endblock %}

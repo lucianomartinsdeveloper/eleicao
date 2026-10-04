@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Empresa{% endblock title %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>nav form { margin: 0; }</style>
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="{% url 'core:index' %}"><strong>Empresa</strong></a></li>
+            </ul>
+            <ul>
+               {% if user.is_authenticated %}
+                <li><a href="{% url 'person:employee_list' %}">Funcionários</a></li>
+                <li>{{ user.email }}</li>
+                <li>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="outline">Sair</button>
+                    </form>
+                </li>
+               {% else %}
+                <li><a href="{% url 'login' %}" role="button">Entrar</a></li>
+               {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}{% endblock content %}
+    </main>
+</body>
+</html>

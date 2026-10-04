@@ -5,7 +5,18 @@ requires-python = ">=3.13"
 dependencies = [
     "dj-database-url>=3.1.2",
     "django>=6.1.1",
+    "django-extensions>=4.1",
+    "ipython>=9.17.1",
     "gunicorn>=26.2.0",
     "python-decouple>=3.8",
     "whitenoise>=6.12.0",
+    "taskipy>=1.2.1",
 ]
+[tool.taskipy.tasks]
+startapp = "uv run python manage.py startapp"
+makemigrations = "uv run python manage.py makemigrations"
+migrate = "uv run python manage.py migrate"
+createsuperuser = "uv run python manage.py createsuperuser"
+runserver = "uv run python manage.py runserver"
+shell_plus = "uv run python manage.py shell_plus"
+groups = "uv run python manage.py create_groups"
