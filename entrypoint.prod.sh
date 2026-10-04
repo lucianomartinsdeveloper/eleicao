@@ -5,4 +5,4 @@ uv run python manage.py collectstatic --noinput &
 
 uv run python manage.py qcluster &
 
-gunicorn core.wsgi
+gunicorn kernel.wsgi
