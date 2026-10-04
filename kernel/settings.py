@@ -51,6 +51,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'kernel.urls'
 
+CSRF_TRUSTED_ORIGINS = ['https://*.railway.app',]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
