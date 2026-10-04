@@ -1,0 +1,28 @@
+services:
+#  db:
+#    image: postgres:18-alpine
+#    env_file: .env
+#    volumes:
+#      - pgdata:/var/lib/postgresql
+
+#  mailpit:
+#    image: axllent/mailpit
+#    ports:
+#      - "8025:8025"
+
+  web:
+    build: .
+    command: uv run python manage.py runserver 0.0.0.0:8000
+#    env_file: .env
+    volumes:
+      - .:/app
+      - venv:/opt/venv
+    ports:
+      - "8000:8000"
+#    depends_on:
+#      - db
+#      - mailpit
+
+volumes:
+#  pgdata:
+  venv:
