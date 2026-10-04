@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Funcionários</h2>
+{% if perms.person.add_employee %}
+    <a href="{% url 'person:employee_create' %}" role="button">New funcionário</a>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Cargo</th>
+            {% if perms.person.view_salary %}<th>Salário</th>{% endif %}
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in object_list %}
+            <tr>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.get_role_display }}</td>
+                {% if perms.person.view_salary %}<td>R$ {{ employee.salary }}</td>{% endif %}
+                <td>
+                    {% if perms.person.change_employee %}
+                        <a href="{% url 'person:employee_update' employee.pk %}">Editar</a>
+                    {% endif %}
+                    {% if perms.person.delete_employee %}
+                        <a href="{% url 'person:employee_delete' employee.pk %}">Excluir</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
